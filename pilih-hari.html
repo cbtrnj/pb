@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Hari</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      color: #333;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Aurora layers */
+    .aurora, .aurora2, .aurora3 {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .aurora {
+      background: radial-gradient(circle at 30% 70%, rgba(102,255,204,0.8), transparent 70%),
+                  radial-gradient(circle at 70% 30%, rgba(102,204,255,0.8), transparent 70%);
+      animation: auroraRotate 8s linear infinite, auroraFade 4s ease-in-out infinite alternate;
+      filter: blur(15px);
+    }
+    .aurora2 {
+      background: radial-gradient(circle at 20% 80%, rgba(255,102,204,0.7), transparent 70%),
+                  radial-gradient(circle at 80% 20%, rgba(204, 102, 255, 0.772), transparent 70%);
+      animation: auroraRotateReverse 10s linear infinite, auroraFade 3s ease-in-out infinite alternate;
+      filter: blur(18px);
+    }
+    .aurora3 {
+      background: radial-gradient(circle at 50% 90%, rgba(0, 102, 255, 0.89), transparent 70%),
+                  radial-gradient(circle at 40% 10%, rgba(255, 251, 0, 0.916), transparent 70%);
+      animation: auroraRotate 8s linear infinite, auroraFade 3s ease-in-out infinite alternate;
+      filter: blur(20px);
+    }
+
+    @keyframes auroraRotate { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.05); } }
+    @keyframes auroraRotateReverse { from { transform: rotate(360deg) scale(1); } to { transform: rotate(0deg) scale(1.05); } }
+    @keyframes auroraFade { from { opacity: 0.4; } to { opacity: 0.9; } }
+
+    .container {
+      max-width: 640px;
+      margin: auto;
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1; /* konten di atas aurora */
+    }
+
+    /* Wave dekoratif di sisi atas */
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -40px; left: 0;
+      width: 100%; height: 80px;
+      background: linear-gradient(135deg, #1E90FF, #00BFFF);
+      clip-path: ellipse(75% 100% at 50% 0%);
+      z-index: 0;
+    }
+
+    /* Wave dekoratif di sisi bawah */
+    .container::after {
+      content: "";
+      position: absolute;
+      bottom: -40px; left: 0;
+      width: 100%; height: 80px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      clip-path: ellipse(75% 100% at 50% 100%);
+      z-index: 0;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 800;
+      color: #2c3e50;
+      position: relative;
+      z-index: 1;
+    }
+
+    #motivasi {
+      font-size: 14px;
+      font-style: italic;
+      margin: 16px auto;
+      padding: 12px;
+      background: #f9f9f9;
+      border-left: 4px solid #1E90FF;
+      border-radius: 10px;
+      max-width: 480px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    #motivasi span {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
+    #motivasi span.active { opacity: 1; position: relative; }
+
+    .btn {
+      display: block;
+      margin: 14px auto;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn.aktif {
+      background: linear-gradient(135deg, #1E90FF, #00BFFF);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(30,144,255,0.3);
+    }
+    .btn.aktif:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(30,144,255,0.4);
+    }
+
+    .btn.nonaktif {
+      background: #e0e0e0;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #777;
+      position: relative;
+      z-index: 1;
+    }
+    .footer .pkbm { font-weight: bold; color: #555; }
+    .footer .design { font-weight: bold; color: #a67c00; }
+  </style>
+</head>
+<body>
+  <!-- Aurora background -->
+  <div class="aurora"></div>
+  <div class="aurora2"></div>
+  <div class="aurora3"></div>
+
+  <div class="container">
+    <h2>Pilih Hari Ujian</h2>
+    <h2>Paket B</h2>
+
+    <!-- Motivasi carousel -->
+    <div id="motivasi">
+      <span class="active">Setiap klik adalah langkah menuju masa depanmu ✨</span>
+      <span>Percaya diri adalah kunci keberhasilanmu 💪</span>
+      <span>Jangan takut mencoba, kamu luar biasa 🌟</span>
+      <span>Ujian ini adalah pintu menuju impianmu 🚪</span>
+      <span>Kerjakan dengan tenang, kamu sudah siap 🧠</span>
+    </div>
+
+    <!-- Daftar Hari -->
+    <div id="daftar-hari"></div>
+
+    <div class="footer">
+      <span class="pkbm">© PKBM Ristek Nusantara Jaya | TP 2025–2026</span><br>
+      <span class="design">Copyright By RNJ Cikarang</span>
+    </div>
+  </div>
+
+  <script>
+    // 🔗 LINK FILE SOAL
+    const linkHari = {
+      "Senin": "senin.html",
+      "Selasa": "selasa.html",
+      "Rabu": "rabu.html",
+    };
+
+    // ⏰ JADWAL JAM AKTIF PER HARI
+    const jadwalJam = {
+      "Senin": [6, 23],
+      "Selasa": [6, 23],
+      "Rabu": [6, 23],
+    };
+
+    // 📌 SETTING HARI AKTIF
+    const hariAktif = ["Senin", "Selasa", "Rabu", ]; 
+
+    const container = document.getElementById("daftar-hari");
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    Object.keys(linkHari).forEach(hari => {
+      const [startHour, endHour] = jadwalJam[hari];
+      const aktif = (hariAktif.includes(hari)) && (currentHour >= startHour && currentHour <= endHour);
+
+      const tombol = document.createElement(aktif ? "a" : "div");
+      tombol.innerHTML = `📅 ${hari}<br><small>CBT aktif ${startHour}:00–${endHour}:00 WIB</small>`;
+      tombol.className = `btn ${aktif ? "aktif" : "nonaktif"}`;
+      if (aktif) tombol.href = linkHari[hari];
+      container.appendChild(tombol);
+    });
+
+    // ✨ MOTIVASI BERGANTI OTOMATIS
+    const motivasiSpans = document.querySelectorAll('#motivasi span');
+    let idx = 0;
+    setInterval(() => {
+      motivasiSpans[idx].classList.remove('active');
+      idx = (idx + 1) % motivasiSpans.length;
+      motivasiSpans[idx].classList.add('active');
+    }, 3000); // berganti tiap 3 detik
+  </script>
+</body>
+</html>
