@@ -2,171 +2,140 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CBT PAS - Hari Senin</title>
+  <title>Pengecekan Sistem Keamanan Dapodik</title>
   <style>
-    body { font-family:'Segoe UI',sans-serif; background:#f4f7fc; margin:0; position:relative; min-height:100vh; overflow-x:hidden; }
-    header { background:#005baa; color:white; padding:20px; text-align:center; border-bottom:4px solid #ffc107; position:relative; z-index:1; }
-    header h1 { font-size:2em; margin:0; }
-    header p { font-size:1em; margin:5px 0 0; }
-    section { padding:20px; position:relative; z-index:1; }
-    h2 { color:#005baa; margin-top:40px; }
-    .card-group { display:flex; flex-wrap:wrap; gap:20px; }
-    .card { border-radius:14px; padding:18px; box-shadow:0 6px 16px rgba(0,0,0,0.08); transition:transform 0.3s ease, box-shadow 0.3s ease; color:#fff; flex:1 1 260px; }
-    .card:hover { transform:translateY(-5px); box-shadow:0 10px 24px rgba(0,0,0,0.15); }
-    .card h3 { margin-top:0; font-size:1.1em; font-weight:700; }
-    .btn { display:inline-block; background:rgba(255,255,255,0.9); color:#333; padding:10px 14px; margin-top:10px; border-radius:8px; text-decoration:none; font-weight:bold; transition:background 0.3s ease; }
-    .btn.locked { background:#aaa; color:#eee; cursor:not-allowed; pointer-events:none; }
-    .pengawas { font-size:0.85em; margin-top:8px; font-style:italic; color:rgba(255,255,255,0.9); }
-    .agama-buttons { display:flex; flex-direction:column; gap:6px; margin-top:10px; }
-    .agama-buttons button { background:#005baa; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:bold; }
-    .agama-buttons button.locked { background:#aaa; color:#eee; cursor:not-allowed; pointer-events:none; }
-    .card.indonesia { background:linear-gradient(135deg,#ff512f,#f09819); }
-    .card.kimia     { background:linear-gradient(135deg,#43cea2,#185a9d); }
-    .card.fisika    { background:linear-gradient(135deg,#1E90FF,#00BFFF); }
-    .card.seni      { background:linear-gradient(135deg,#f7971e,#ffd200); }
-    .aurora,.aurora2,.aurora3{position:fixed;inset:0;z-index:0;pointer-events:none;}
-    .aurora{background:radial-gradient(circle at 30% 70%,rgba(102,255,204,0.7),transparent 70%),radial-gradient(circle at 70% 30%,rgba(102,204,255,0.7),transparent 70%);animation:auroraRotate 15s linear infinite,auroraFade 5s ease-in-out infinite alternate;filter:blur(15px);}
-    .aurora2{background:radial-gradient(circle at 20% 80%,rgba(255,102,204,0.6),transparent 70%),radial-gradient(circle at 80% 20%,rgba(204,102,255,0.6),transparent 70%);animation:auroraRotateReverse 18s linear infinite,auroraFade 6s ease-in-out infinite alternate;filter:blur(18px);}
-    .aurora3{background:radial-gradient(circle at 50% 90%,rgba(0,102,255,0.6),transparent 70%),radial-gradient(circle at 40% 10%,rgba(0,255,204,0.6),transparent 70%);animation:auroraRotate 20s linear infinite,auroraFade 7s ease-in-out infinite alternate;filter:blur(20px);}
-    @keyframes auroraRotate{from{transform:rotate(0deg) scale(1);}to{transform:rotate(360deg) scale(1.05);}}
-    @keyframes auroraRotateReverse{from{transform:rotate(360deg) scale(1);}to{transform:rotate(0deg) scale(1.05);}}
-    @keyframes auroraFade{from{opacity:0.4;}to{opacity:0.9;}}
-    footer{text-align:center;padding:20px;font-size:12px;color:#555;background:rgba(255,255,255,0.85);border-top:2px solid #ffc107;position:relative;z-index:1;}
+    body {
+      margin: 0;
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+    }
+    header {
+      background: #1E90FF;
+      color: #980303;
+      padding: 17px;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    header p {
+      margin: 4px 0;
+      font-size: 18px;
+    }
+    /* Logo LIVE berkedip */
+    .live-logo {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: red;
+      color: white;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      animation: blink 1s infinite;
+      font-family: monospace;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    .console {
+      padding: 20px;
+      height: 70vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.4;
+    }
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      font-size: 32px;
+      font-style: italic;
+      font-weight: bold;
+      color: rgba(255,0,0,0.25);
+      z-index: 9999;
+      pointer-events: none;
+      text-align: center;
+    }
+    footer {
+      background: #1E90FF;
+      color: #930808;
+      text-align: center;
+      padding: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <h1>🔒 Pengecekan Sistem Keamanan Dapodik</h1>
+    <p>Proses diawasi oleh Cyber Pusdatin</p>
+    <p>IT Cyber: Ganosec19 Cikarang</p>
+    <div class="live-logo">LIVE</div>
+  </header>
 
-<div class="aurora"></div><div class="aurora2"></div><div class="aurora3"></div>
-
-<header>
-  <h1>CBT PAS - Hari Senin</h1>
-  <p>PKBM Ristek Nusantara Jaya</p>
-  <p>Tahun Pelajaran 2025/2026</p>
-</header>
-
-<section>
-  <h2>🧑‍🎓 Kelas VII</h2>
-  <div class="card-group">
-    <div class="card indonesia"><h3>09:00 - 10:00</h3><a id="btn-xipa-indonesia" href="#" class="btn">Bahasa Indonesia</a><p class="pengawas">Pengawas: Camera Aplication CBT</p></div>
-    <div class="card kimia"><h3>10:00 - 11:00</h3><a id="btn-xipa-kimia" href="#" class="btn">PPKN</a><p class="pengawas">Pengawas: Camera Aplication CBT</p></div>
-    <div class="card fisika"><h3>11:00 - 12:00</h3><p>Pendidikan Agama:</p><p class="pengawas">Pengawas: Camera Aplication CBT</p>
-      <div class="agama-buttons">
-        <a id="btn-i-agama-islam" href="placeholdersoal.html">Islam</a>
-        <a id="btn-i-agama-kristen" href="placeholdersoal.html">Kristen</a>
-        <a id="btn-i-agama-katolik" href="placeholdersoal.html">Katolik</a>
-        <a id="btn-i-agama-hindu" href="placeholdersoal.html">Hindu</a>
-        <a id="btn-i-agama-budha" href="placeholdersoal.html">Budha</a>
-      </div>
-    </div>
-    <div class="card seni"><h3>12:00 - 13:00</h3><a id="btn-xipa-seni" href="#" class="btn">Seni Budaya</a><p class="pengawas">Pengawas: Camera Aplication CBT</p></div>
+  <!-- Watermark segel -->
+  <div class="watermark">
+    Proses Ini di awasi langsung<br>
+    Oleh Bada Keamanan Standart Negara RI
   </div>
-</section>
 
-<section>
-  <h2>🧑‍🎓 Kelas VIII</h2>
-  <div class="card-group">
-    <div class="card indonesia"><h3>09:00 - 10:00</h3><a id="btn-xiipa-indonesia" href="#" class="btn">Bahasa Indonesia</a><p class="pengawas">Pengawas: Irma Tania</p></div>
-    <div class="card kimia"><h3>10:00 - 11:00</h3><a id="btn-xiipa-kimia" href="#" class="btn">PPKN</a><p class="pengawas">Pengawas: Vika Hidayati</p></div>
-    <div class="card fisika"><h3>11:00 - 12:00</h3><p>Pendidikan Agama:</p><p class="pengawas">Pengawas: Sri Lestiana</p>
-      <div class="agama-buttons">
-        <a id="btn-i-agama-islam" href="placeholdersoal.html">Islam</a>
-        <a id="btn-i-agama-kristen" href="placeholdersoal.html">Kristen</a>
-        <a id="btn-i-agama-katolik" href="placeholdersoal.html">Katolik</a>
-        <a id="btn-i-agama-hindu" href="placeholdersoal.html">Hindu</a>
-        <a id="btn-i-agama-budha" href="placeholdersoal.html">Budha</a>
-      </div>
-    </div>
-        <div class="card seni"><h3>12:00 - 13:00</h3><a id="btn-xiipa-seni" href="#" class="btn">Seni Budaya</a><p class="pengawas">Pengawas: Asri Dewantoro</p></div>
-  </div>
-</section>
+  <!-- Console log -->
+  <div id="console" class="console"></div>
 
-<section>
-  <h2>🧑‍🎓 Kelas IX</h2>
-  <div class="card-group">
-    <div class="card indonesia">
-      <h3>09:00 - 10:00</h3>
-      <a id="btn-xiiipa-indonesia" href="#" class="btn">Bahasa Indonesia</a>
-      <p class="pengawas">Pengawas: AIrma Tania</p>
-    </div>
-    <div class="card kimia">
-      <h3>10:00 - 11:00</h3>
-      <a id="btn-xiiipa-kimia" href="#" class="btn">PPKN</a>
-      <p class="pengawas">Pengawas: Vika Hidayati</p>
-    </div>
-    <div class="card fisika">
-      <h3>11:00 - 12:00</h3>
-      <p>Pendidikan Agama:</p>
-      <p class="pengawas">Pengawas: Sri Lestiana</p>
-      <div class="agama-buttons">
-        <a id="btn-i-agama-islam" href="placeholdersoal.html">Islam</a>
-        <a id="btn-i-agama-kristen" href="placeholdersoal.html">Kristen</a>
-        <a id="btn-i-agama-katolik" href="placeholdersoal.html">Katolik</a>
-        <a id="btn-i-agama-hindu" href="placeholdersoal.html">Hindu</a>
-        <a id="btn-i-agama-budha" href="placeholdersoal.html">Budha</a>
-      </div>
-    </div>
-    <div class="card seni">
-      <h3>12:00 - 13:00</h3>
-      <a id="btn-xiiipa-seni" href="#" class="btn">Seni Budaya</a>
-      <p class="pengawas">Pengawas: Asri Dewantoro</p>
-    </div>
-  </div>
-</section>
+  <!-- Footer -->
+  <footer>
+    Pusdatin Kemdikbud | Tangerang Selatan
+  </footer>
 
-<footer>
-  © PKBM Ristek Nusantara Jaya | TP 2025–2026<br>
-  Desain oleh RNJ Cikarang
-</footer>
+  <script>
+    const consoleEl = document.getElementById("console");
 
-<script>
-  const soalSettings = {
-    "btn-xipa-indonesia": false,
-    "btn-xipa-kimia": false,
-    "btn-xipa-agama-islam": false,
-    "btn-xipa-agama-kristen": false,
-    "btn-xipa-agama-katolik": false,
-    "btn-xipa-agama-hindu": false,
-    "btn-xipa-agama-budha": false,
-    "btn-xipa-seni": false,
+    function randomHex(len=16) {
+      return Array.from({length: len}, () => "0123456789abcdef"[Math.floor(Math.random()*16)]).join("");
+    }
+    function randomIP() {
+      return Array.from({length:4}, () => Math.floor(Math.random()*255)).join(".");
+    }
 
-    "btn-xiipa-indonesia": false,
-    "btn-xiipa-kimia": false,
-    "btn-xiipa-agama-islam": true,
-    "btn-xiipa-agama-kristen": true,
-    "btn-xiipa-agama-katolik": true,
-    "btn-xiipa-agama-hindu": true,
-    "btn-xiipa-agama-budha": true,
-    "btn-xiipa-seni": false,
+    const templates = [
+      () => `[${new Date().toISOString()}] AUTH: verifikasi token ${randomHex(32)} ... OK`,
+      () => `[${new Date().toISOString()}] FIREWALL: paket masuk dari ${randomIP()}:${Math.floor(Math.random()*65535)} → DROP`,
+      () => `[${new Date().toISOString()}] IDS: anomali pola login dari ${randomIP()} → FLAG`,
+      () => `[${new Date().toISOString()}] HASH: checksum SHA256 ${randomHex(64)} cocok`,
+      () => `[${new Date().toISOString()}] AUDIT: integritas data rombel | delta=0 records → STABLE`,
+      () => `[${new Date().toISOString()}] TLS: negosiasi cipher suite ECDHE-RSA-AES256-GCM-SHA384 ... OK`,
+      () => `[${new Date().toISOString()}] KERENTANAN: CVE-20${Math.floor(Math.random()*25)}-${randomHex(4)} → tidak terpengaruh`
+    ];
 
-    "btn-xiiipa-indonesia": false,
-    "btn-xiiipa-kimia": false,
-    "btn-xiiipa-agama-islam": true,
-    "btn-xiiipa-agama-kristen": true,
-    "btn-xiiipa-agama-katolik": true,
-    "btn-xiiipa-agama-hindu": true,
-    "btn-xiiipa-agama-budha": true,
-    "btn-xiiipa-seni": false
-  };
+    function writeLine(text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
 
-  function applySettings(){
-    Object.keys(soalSettings).forEach(id=>{
-      const btn=document.getElementById(id);
-      if(btn){
-        if(soalSettings[id]){
-          btn.classList.add("locked");
-          btn.setAttribute("href","#");
-          if(!btn.textContent.includes("(Terkunci)")) {
-            btn.textContent += " (Terkunci)";
-          }
-        } else {
-          btn.classList.remove("locked");
-        }
-      }
-    });
-  }
-  applySettings();
-</script>
+    // loop tanpa henti
+    setInterval(() => {
+      const log = templates[Math.floor(Math.random()*templates.length)]();
+      writeLine(log);
+    }, 200);
+  </script>
+</body>
+</html>
 
+    }, 200);
+  </script>
 </body>
 </html>
